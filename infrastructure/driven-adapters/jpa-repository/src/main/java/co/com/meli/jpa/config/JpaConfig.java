@@ -18,11 +18,14 @@ import java.util.Properties;
 public class JpaConfig {
 
     @Bean
-    public DBSecret dbSecret(Environment env) {
+    public DBSecret dbSecret(@Value("${datasource-url}") String datasourceUrl,
+                             @Value("${datasource-username}") String datasourceUsername,
+                             @Value("${datasource-password}") String datasourcePassword) {
+
         return DBSecret.builder()
-                .url(env.getProperty("spring.datasource.url"))
-                .username(env.getProperty("spring.datasource.username"))
-                .password(env.getProperty("spring.datasource.password"))
+                .url(datasourceUrl)
+                .username(datasourceUsername)
+                .password(datasourcePassword)
                 .build();
     }
 
