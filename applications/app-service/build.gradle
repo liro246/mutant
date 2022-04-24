@@ -8,6 +8,7 @@ dependencies {
     implementation project(':usecase')
     implementation 'org.springframework.boot:spring-boot-starter'
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
+    runtimeOnly group: 'com.microsoft.azure', name: 'azure-keyvault-secrets-spring-boot-starter', version: '2.3.5'
 }
 
 task explodedJar(type: Copy) {
