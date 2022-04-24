@@ -1,20 +1,23 @@
 package co.com.meli.usecase.mutant;
 
+import co.com.meli.model.events.gateways.EventsGateway;
 import co.com.meli.model.mutant.Mutant;
 import co.com.meli.model.mutant.MutantOperations;
-import co.com.meli.model.mutant.gateways.MutantRepository;
+import co.com.meli.model.mutant.events.SaveMutantCreated;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 @Log
 @RequiredArgsConstructor
 public class MutantUseCase {
-    private final MutantRepository mutantRepository;
+
+    private final EventsGateway eventsGateway;
 
     public Mono<Mutant> isMutant(String[] dna) {
 
@@ -27,13 +30,7 @@ public class MutantUseCase {
         String dnaToString = Arrays.toString(dna);
         Mutant mutant = Mutant.builder().dna(dnaToString).isMutant(this.isMutant(streamSupplier, dna.length)).build();
 
-        mutantRepository.findByDna(dnaToString)
-                .map(mutantMap -> mutant)
-                .switchIfEmpty(mutantRepository.save(mutant))
-                .onErrorResume(throwable -> {
-                    log.severe(throwable.getMessage());
-                    return Mono.empty();
-                }).subscribe();
+        emitSaveMutantEvent(mutant);
 
         return Mono.just(mutant);
     }
@@ -49,6 +46,10 @@ public class MutantUseCase {
 
     private long validateMutant(Stream<String> streamMutant) {
         return streamMutant.filter(s -> s.contains("AAAA") || s.contains("CCCC") || s.contains("GGGG") || s.contains("TTTT")).count();
+    }
+
+    private void emitSaveMutantEvent(Mutant mutant) {
+        eventsGateway.emit(new SaveMutantCreated(mutant, new Date()));
     }
 
 }
