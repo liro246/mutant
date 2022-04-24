@@ -12,9 +12,15 @@ spring:
   profiles:
     include: null
   datasource:
-    url: "jdbc:h2:mem:test"
-    username: "sa"
-    password: "pass"
-    driverClassName: "org.h2.Driver"
+    driverClassName: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
   jpa:
-    databasePlatform: "org.hibernate.dialect.H2Dialect"
+    databasePlatform: "org.hibernate.dialect.SQLServer2012Dialect"
+  webflux:
+    base-path: /api
+azure:
+  keyvault:
+    client-id: ${CLIENT_ID}
+    client-key: ${CLIENT_KEY}
+    enabled: true
+    tenant-id: ${TENANT_ID}
+    uri: https://mutantmeli.vault.azure.net/
