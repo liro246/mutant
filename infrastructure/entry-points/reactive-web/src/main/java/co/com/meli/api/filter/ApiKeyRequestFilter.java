@@ -22,7 +22,10 @@ public class ApiKeyRequestFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         String headerKey = exchange.getRequest().getHeaders().getFirst("x-api-key");
-        if (!apiGeeKey.equals(headerKey) && !exchange.getRequest().getPath().value().contains("/health")) {
+        if (!apiGeeKey.equals(headerKey) &&
+                !exchange.getRequest().getPath().value().contains("/health") &&
+                !exchange.getRequest().getPath().value().contains("swagger") &&
+                !exchange.getRequest().getPath().value().contains("doc")) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Api key not found");
         }
         return chain.filter(exchange);
