@@ -1,5 +1,6 @@
 package co.com.meli.api.healthcheck;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class HealthService {
     @GetMapping()
+    @ApiOperation(value = "Servicio de estado de la aplicacion")
     public Mono<String> health(){
         return Mono.just("Status Ok");
     }
