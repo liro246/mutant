@@ -216,19 +216,23 @@ Una vez finalice la ejecución en la consola se visualizara lo siguiente:
 
 ### Diagrama recursos Nube Azure
 
-![Mutant API.png)](ReadmeImages/Mutant API.png)
+![MutantAPI.png)](ReadmeImages/MutantAPI.png)
 
 ### URL de consumo
-
--Requiere agregar un header de seguridad
-
-    API-Key-Mutant : f4a32a6248a942e58224e534b0b0f795
 
 1. URL Swagger
 
        https://mutantsmeli.azurewebsites.net/api/swagger-ui.html 
 
+   - Requiere agregar un header de seguridad
+     
+         x-api-key : cD*&T5&k*vKh
+
 2. URL API
 
        https://mutantmeliapi.azure-api.net/mutant/
        https://mutantmeliapi.azure-api.net/stats
+
+    - Requiere agregar un header de seguridad
+
+          API-Key-Mutant : f4a32a6248a942e58224e534b0b0f795
