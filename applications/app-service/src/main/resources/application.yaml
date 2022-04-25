@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "mutant"
+  devtools:
+    add-properties: false
+  h2:
+    console:
+      enabled: true
+      path: "/h2"
+  profiles:
+    include: null
+  datasource:
+    driverClassName: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+  jpa:
+    databasePlatform: "org.hibernate.dialect.SQLServer2012Dialect"
+  webflux:
+    base-path: /api
+azure:
+  keyvault:
+    client-id: ${CLIENT_ID}
+    client-key: ${CLIENT_KEY}
+    enabled: true
+    tenant-id: ${TENANT_ID}
+    uri: https://mutantmeli.vault.azure.net/
