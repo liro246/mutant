@@ -41,10 +41,28 @@ La aplicación base se genero a partir del plugin open source creado por Bancolo
 ## Domain
 
 Es el módulo más interno de la arquitectura, pertenece a la capa del dominio y encapsula la lógica y reglas del negocio mediante modelos y entidades del dominio.
+ 
+Aqui encontraremos:
+
+1. gateways
+   1. MutantRepository
+2. Mutant.java
+3. MutantOperations.java
+4. Test
+   1. StatisticsMutant.java
+   2. MutantOperationsTest.java
 
 ## Usecases
 
 Este módulo gradle perteneciente a la capa del dominio, implementa los casos de uso del sistema, define lógica de aplicación y reacciona a las invocaciones desde el módulo de entry points, orquestando los flujos hacia el módulo de entities.
+
+Aqui encontraremos:
+
+1. MutantUseCase.java
+2. QueryStatisticsMutantUseCase.java
+3. Test
+   1. MutantUseCaseTest.java
+   2. QueryStatisticsMutantUseCaseTest.java
 
 ## Infrastructure
 
@@ -54,13 +72,47 @@ Los driven adapter representan implementaciones externas a nuestro sistema, como
 soap, bases de datos, lectura de archivos planos, y en concreto cualquier origen y fuente de datos con la que debamos
 interactuar.
 
+Aqui encontraremos el modulo de persistencia jpa-repository:
+
+1. config
+   1. DBSecret.java
+   2. JpaConfig.java
+2. helper
+   1. AdapterOperations.java
+3. mutant
+   1. MutantData.java
+4. JPARepository.java
+5. JPARepositoryAdapter.java -> Interfaz
+
 ### Entry Points
 
 Los entry points representan los puntos de entrada de la aplicación o el inicio de los flujos de negocio.
 
+Aqui encontraremos el modulo de web reactive-web:
+
+1. config
+    1. SwaggerConfiguration.java
+2. customexception
+    1. CustomExceptionHandler.java
+3. dto
+    1. MutantDTO.java
+4. filter
+   1. ApiKeyRequestFilter.java
+5. healthcheck
+   1. HealthService.java
+6. web
+   1. QueryMutantService.java
+   2. QueryStatisticsMutantService.java
+7. Test
+   1. QueryMutantServiceTest.java
+   2. QueryStatisticsMutantServiceTest.java
+
 ## Application
 
-Este módulo es el más externo de la arquitectura, es el encargado de ensamblar los distintos módulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma automática, inyectando en éstos instancias concretas de las dependencias declaradas. Además inicia la aplicación (es el único módulo del proyecto donde encontraremos la función “public static void main(String[] args)”.
+Este módulo es el más externo de la arquitectura, es el encargado de ensamblar los distintos módulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma automática, inyectando en éstos instancias concretas de las dependencias declaradas. 
+
+**Además inicia la aplicación (es el único módulo del proyecto donde encontraremos la función “public static void main(String[] args)”.**
+
 
 # Ejecución de la aplicación
 
