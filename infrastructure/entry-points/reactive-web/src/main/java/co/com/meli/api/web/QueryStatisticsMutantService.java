@@ -1,5 +1,6 @@
 package co.com.meli.api.web;
 
+import co.com.meli.api.config.SwaggerConfiguration;
 import co.com.meli.model.mutant.StatisticsMutant;
 import co.com.meli.usecase.mutant.QueryStatisticsMutantUseCase;
 import io.swagger.annotations.*;
@@ -16,6 +17,7 @@ import reactor.core.publisher.Mono;
 @Controller
 @RequestMapping("/stats")
 @RequiredArgsConstructor
+@Api(tags = {SwaggerConfiguration.MUTANT_TAG})
 public class QueryStatisticsMutantService {
 
     private final QueryStatisticsMutantUseCase queryStatisticsMutantUseCase;

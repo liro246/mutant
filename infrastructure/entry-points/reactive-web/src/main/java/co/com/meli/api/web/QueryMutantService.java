@@ -1,5 +1,6 @@
 package co.com.meli.api.web;
 
+import co.com.meli.api.config.SwaggerConfiguration;
 import co.com.meli.api.dto.MutantDTO;
 import co.com.meli.usecase.mutant.MutantUseCase;
 import io.swagger.annotations.*;
@@ -17,6 +18,7 @@ import reactor.core.publisher.Mono;
 @Controller
 @RequestMapping(value = "/mutant")
 @RequiredArgsConstructor
+@Api(tags = {SwaggerConfiguration.MUTANT_TAG})
 public class QueryMutantService {
 
     private final MutantUseCase mutantUseCase;
